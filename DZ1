@@ -1,0 +1,65 @@
+Select name, score, surname
+from student21
+where score >=3 and score <=4	
+
+Select name, surname, score
+from student21
+where N_GROUP >=1000 and N_GROUP <=3000
+
+Select name, surname, score
+from student21
+where N_GROUP like'2%'
+
+Select name, surname, score
+from student21
+where to_char(date_birth, 'RR') >=0 and to_char(date_birth, 'RR') <=20
+
+Select name, surname, score
+from student21
+where to_char(date_birth, 'mon') = 'JUN'
+
+Select name, surname, score
+from student21
+where to_char(date_birth, 'mon')= to_char(sysdate, 'mon')
+
+Select *
+from student21
+order by N_GROUP ASC
+
+Select *
+from student21
+order by N_GROUP ASC, surname
+
+Select *
+from student21
+where score >4
+order by score desc
+
+Select *
+from student21
+order by score desc fetch first 5 rows only
+
+SELECT *
+FROM
+  (SELECT *
+   FROM student21
+   ORDER BY score DESC)
+WHERE rownum <=5
+
+SELECT name as ,
+ Case risk
+When 10 THEN 'очень высокий риск'
+When 9 THEN 'очень высокий риск'
+When 8 THEN 'очень высокий риск'
+When 7 THEN 'высокий риск'
+When 6 THEN 'высокий риск'
+When 5 THEN 'средний риск'
+When 4 THEN 'средний  риск'
+When 3 THEN 'низкий риск'
+When 2 THEN 'низкий риск'
+When 1 THEN 'очень низкий риск'
+
+end
+as risk 
+
+FROM hobbies; 
