@@ -14,10 +14,12 @@ SELECT Extract(YEAR from date_birth),count(date_birth)
 FROM student21
 GROUP BY Extract(YEAR from date_birth) 
 
+-- для заданного курса
 SELECT trunc(n_group,3), AVG(SCORE)
 FROM student21
 GROUP BY n_group
 
+-- для заданного курса только 1 номер группы
 SELECT max(score), n_group
 FROM student21
 where n_group like '2%'
@@ -29,6 +31,7 @@ GROUP BY n_group
 having avg(score)<=3.5
 order by avgscore asc
 
+-- тут выводит не максимальные хобби
 Select * 
 FROM (
       SELECT max(risk), name
@@ -41,7 +44,7 @@ SELECT n_group, count(n_z), max(score), avg(score), min(score)
 FROM student21
 GROUP BY n_group
 
-
+-- а если максимальный балл у двух студентов одинаковый?
 SELECT name, n_z, surname, score, n_group
 FROM student21
 where n_group like '2253'
