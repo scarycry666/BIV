@@ -1,0 +1,50 @@
+1
+SELECT student21.Name, 
+student21.Surname, 
+STUDENTS_HOBBIES.HOBBY_ID, 
+HOBBIES.NAME 
+FROM student21, 
+STUDENTS_HOBBIES, 
+HOBBIES 
+WHERE STUDENTS_HOBBIES.HOBBY_ID=HOBBIES.ID and student21.Nz= STUDENTS_HOBBIES.N_z;
+2
+SELECT * 
+FROM 
+(SELECT student21.Name, 
+student21.Surname, 
+students_hobbies.hobby_id, 
+CASE 
+WHEN date_finish is null THEN sysdate-students_hobbies.date_start 
+ELSE students_hobbies.date_finish-students_hobbies.date_start 
+END AS status 
+FROM student21, 
+students_hobbies 
+WHERE student21.Nz= students_hobbies.N_z 
+GROUP BY date_finish, date_start, hobby_id, name, surname 
+ORDER BY status desc) 
+WHERE rownum=1 
+4
+SELECT student21.nz, 
+student21.name, 
+hobbies.name, 
+student21.surname, 
+MONTHS_BETWEEN(date_finish, date_start) 
+FROM student21, 
+students_hobbies, 
+hobbies 
+WHERE student21.Nz= students_hobbies.N_z 
+and students_hobbies.hobby_id=hobby_id 
+and date_finish is not null 
+5
+SELECT student21.nz, 
+student21.name, 
+student21.surname, 
+hobbies.name, 
+MONTHS_BETWEEN(sysdate,date_birth)/12 
+FROM student21, 
+students_hobbies, 
+hobbies
+WHERE student21.Nz= students_hobbies.N_z 
+and students_hobbies.hobby_id=hobbies.id 
+and students_hobbies.hobby_id is not null 
+and MONTHS_BETWEEN(sysdate,date_birth)>=240 
